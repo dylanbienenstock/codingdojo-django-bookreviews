@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<h1>Reviews for: {{book.title}} by {{book.author}}</h1>
+
+	{% for review in all_reviews %}
+		<div class="form-box review" style="max-width: 50%">
+			<p>Poster: {{review.poster.first_name}} {{review.poster.last_name}}</p>
+			<p>Rating: <span class="stars">{{review.rating}}</span></p>
+			<p>Review: {{review.review_text}}</p>
+		</div>
+	{% endfor %}
+{% endblock %}

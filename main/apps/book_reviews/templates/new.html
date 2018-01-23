@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="column" style="margin-left: 35px">
+		<div class="form-box">
+			<h1>New Review</h1>
+
+			<div class="column">
+				<label for="title">Book title:</label>
+				<label for="author">Author:</label>
+				<label for="rating">Rating:</label>
+				<label for="review">Review:</label>
+			</div>
+
+			<div class="column">
+				<form action="/reviews/new/submit" method="post" id="review-form">
+					{% csrf_token %}
+					
+					<input type="text" id="title" name="title">
+					<input type="text" id="author" name="author">
+
+					<div id="rating-container">
+						<select id="rating">
+							<option value="1">&#9733;&#9734;&#9734;&#9734;&#9734;</option>
+							<option value="2">&#9733;&#9733;&#9734;&#9734;&#9734;</option>
+							<option value="3">&#9733;&#9733;&#9733;&#9734;&#9734;</option>
+							<option value="4">&#9733;&#9733;&#9733;&#9733;&#9734;</option>
+							<option value="5">&#9733;&#9733;&#9733;&#9733;&#9733;</option>
+						</select>
+					</div>
+
+					<input type="hidden" name="rating" id="rating-hidden">
+
+					<div id="review-container">
+						<textarea id="review" name="review" form="review-form" rows="5" cols="50"></textarea><br />
+
+						<input type="submit" value="Submit">
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<div class="errors">
+			{% if not success and response_type == "review-submission" %}
+				{% for error in errors %}
+					<p>&bull;&nbsp;{{error}}</p>
+				{% endfor %}
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}
